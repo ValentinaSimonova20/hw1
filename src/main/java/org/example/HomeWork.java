@@ -27,9 +27,12 @@ public class HomeWork {
      * @return количество узлов от 0 до N, где N позиция на которой первый раз условие вернуло fals
      */
     public <T> int partitionBy(Node<T> list, Predicate<T> pred) {
+        if (pred == null) {
+            throw new IllegalArgumentException("pred не должен быть равен null");
+        }
         Node<T> currentElem = list;
         int result = 0;
-        while (pred.test(currentElem.getValue())) {
+        while (currentElem != null && pred.test(currentElem.getValue())) {
             result++;
             currentElem = currentElem.getNext();
         }
@@ -46,6 +49,14 @@ public class HomeWork {
      * @return сам элемент
      */
     public <T> T findNthElement(Node<T> list, int n) {
+        if (list == null) {
+            throw new IllegalArgumentException("list не должен равняться null");
+        }
+        if ((list.getSize() - 1 < n) || n < 0) {
+            throw new IllegalArgumentException(
+                    "Передан невалидный аргумент n. n должен быть больше либо равен нулю, но меньше длины list"
+            );
+        }
         Node<T> result = list;
         while (n != 0) {
             result = result.getNext();

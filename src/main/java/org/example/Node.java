@@ -16,10 +16,13 @@ public class Node<T> {
 
     private T value;
 
+    private int size;
+
     private Node<T> next;
 
     public Node(T value) {
         this.value = value;
+        this.size = 1;
     }
 
     public Node<T> add(T value) {
@@ -29,7 +32,12 @@ public class Node<T> {
         }
         Node<T> newNode = new Node<>(value);
         emptyNode.setNext(newNode);
+        size++;
         return newNode;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     private void setNext(Node<T> newNode) {
